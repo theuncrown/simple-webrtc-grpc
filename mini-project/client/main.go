@@ -32,14 +32,12 @@ var (
 	conn   *grpc.ClientConn
 	client pb.SignalingClient
 
-	data           []byte
 	peerConnection *webrtc.PeerConnection
 
 	oppUuid     string
 	isInitiator bool
 	stream      pb.Signaling_SignalClient
 )
-var test = flag.String("initiator", "", "initiator value")
 
 func main() {
 	var err error
