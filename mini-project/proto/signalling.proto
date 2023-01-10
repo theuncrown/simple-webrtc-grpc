@@ -1,0 +1,59 @@
+syntax = "proto3";
+
+package signalling;
+option go_package = "/signalling";
+
+service login {
+    rpc TestLogin(LoginRequest) returns (LoginReply) {}
+
+    rpc RecvMessage(ChatRequest) returns (stream ChatReply) {}
+
+    rpc SendMessage(ChatRequest) returns (ChatReply) {}
+    
+    rpc TestLogout(LogoutRequest) returns (LogoutReply) {}
+
+    rpc OnlineUserInfo(OnlineInfoRequest) returns (OnlineInfoReply) {}
+
+    rpc MessagingBidi(stream ChatRequest) returns (stream ChatRequest) {}
+}
+
+message LoginRequest {
+    string Uid = 1;
+    string Password = 2;
+}
+
+message LoginReply {
+    string Uid = 1;
+    string Result = 2;
+}
+
+message LogoutRequest {
+    string Uid = 1;
+}
+
+message LogoutReply {
+    string Uid = 1;
+    string Result = 2;
+}
+
+message OnlineInfoRequest {
+    string Uid = 1;
+}
+
+message OnlineInfoReply {
+    string Result = 1;
+    repeated string Uid =2;
+}
+
+message ChatRequest {
+    //sender uid
+    string Uid = 1;
+    //sender message
+    string Message = 2;
+}
+
+message ChatReply {
+    string Uid = 1;
+    string Message = 2;
+    string Result = 3;
+}
